@@ -1,9 +1,4 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using BCrypt.Net;
-
+using static login.Auth;
 
 namespace login
 {
@@ -12,30 +7,6 @@ namespace login
         public registerForm()
         {
             InitializeComponent();
-        }
-
-        private const string ConnectionString = "Server=localhost;Database=auth;Uid=root; Password=;SslMode=None";
-
-        private void CreateUser(string username, string email, string password)
-        {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password.Trim());
-
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                string sql = "INSERT INTO users(username, email, password) VALUES (@username, @email, @password)";
-
-                using (var command = new MySqlCommand(sql, connection))
-                {
-                    command.Parameters.AddWithValue("@username", username.Trim());
-                    command.Parameters.AddWithValue("@email", email.Trim());
-                    command.Parameters.AddWithValue("@password", hashedPassword);
-                    command.ExecuteNonQuery();
-                }
-
-                connection.Close();
-            }
         }
 
         private void ClearRegisterTextFields()
@@ -53,24 +24,28 @@ namespace login
             string password = passwordTextBox.Text;
             string passwordConfirm = passwordConfirmTextBox.Text;
 
-            if (!string.IsNullOrWhiteSpace(username) &&
-                !string.IsNullOrWhiteSpace(email) &&
-                !string.IsNullOrWhiteSpace(password) &&
-                !string.IsNullOrWhiteSpace(passwordConfirm))
+            if (!Utils.ValidateUserInput(username, email, password, passwordConfirm))
             {
-                if (password == passwordConfirm)
-                {
-                    CreateUser(username, email, password);
-                    ClearRegisterTextFields();
-                }
-                else
-                {
-                    MessageBox.Show("Passwords dont match");
-                }
+                MessageBox.Show("One of the required fields is empty", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (password != passwordConfirm)
+            {
+                MessageBox.Show("Passwords don't match", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var (success, errorMessage) = CreateUser(username, email, password);
+            
+            if (success)
+            {
+                MessageBox.Show("User registered successfully!", "Registration Success",  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearRegisterTextFields();
             }
             else
             {
-                MessageBox.Show("One of the required fields is empty");
+                MessageBox.Show(errorMessage, "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

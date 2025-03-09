@@ -38,66 +38,73 @@
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(312, 163);
+            usernameTextBox.Location = new Point(273, 122);
+            usernameTextBox.Margin = new Padding(3, 2, 3, 2);
             usernameTextBox.Name = "usernameTextBox";
-            usernameTextBox.Size = new Size(172, 27);
+            usernameTextBox.Size = new Size(151, 23);
             usernameTextBox.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(312, 140);
+            label1.Location = new Point(273, 105);
             label1.Name = "label1";
-            label1.Size = new Size(73, 20);
+            label1.Size = new Size(59, 15);
             label1.TabIndex = 1;
             label1.Text = "username";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(312, 193);
+            label2.Location = new Point(273, 147);
             label2.Name = "label2";
-            label2.Size = new Size(72, 20);
+            label2.Size = new Size(57, 15);
             label2.TabIndex = 3;
             label2.Text = "password";
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(312, 216);
+            passwordTextBox.Location = new Point(273, 164);
+            passwordTextBox.Margin = new Padding(3, 2, 3, 2);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(172, 27);
+            passwordTextBox.Size = new Size(151, 23);
             passwordTextBox.TabIndex = 2;
             // 
             // loginButton
             // 
-            loginButton.Location = new Point(312, 249);
+            loginButton.Location = new Point(273, 191);
+            loginButton.Margin = new Padding(3, 2, 3, 2);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(172, 29);
+            loginButton.Size = new Size(150, 30);
             loginButton.TabIndex = 4;
             loginButton.Text = "login";
             loginButton.UseVisualStyleBackColor = true;
+            loginButton.Click += loginButton_Click;
             // 
             // registerLabel
             // 
             registerLabel.AutoSize = true;
-            registerLabel.Location = new Point(312, 281);
+            registerLabel.Font = new Font("Segoe UI", 10F);
+            registerLabel.ForeColor = Color.SteelBlue;
+            registerLabel.Location = new Point(273, 223);
             registerLabel.Name = "registerLabel";
-            registerLabel.Size = new Size(59, 20);
+            registerLabel.Size = new Size(55, 19);
             registerLabel.TabIndex = 5;
             registerLabel.Text = "register";
             registerLabel.Click += registerLabel_Click;
             // 
             // loginForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(registerLabel);
             Controls.Add(loginButton);
             Controls.Add(label2);
             Controls.Add(passwordTextBox);
             Controls.Add(label1);
             Controls.Add(usernameTextBox);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "loginForm";
             Text = "Form4";
             ResumeLayout(false);

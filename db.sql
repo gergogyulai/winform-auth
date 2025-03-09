@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `Id` int(11) NOT NULL,
   `UserName` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
   `Password` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `user` (
 --
 -- A tábla indexei `user`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `UserName` (`UserName`);
 
@@ -54,7 +54,7 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT a táblához `user`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
